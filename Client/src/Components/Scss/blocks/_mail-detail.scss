@@ -1,0 +1,233 @@
+/* MailDetail.scss */
+
+/* Анимации появления/исчезновения */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Фон-оверлей на весь экран */
+.mail-detail-overlay {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  top: 40% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 9999 !important;
+  animation: fadeIn 0.25s ease-out both;
+
+  &[data-closing="true"] {
+    animation: fadeOut 0.2s ease-in both;
+  }
+}
+
+/* Само модальное окно */
+.mail-detail {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  opacity: 1;
+  width: 90%;
+  max-width: 500px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Хедер модалки */
+.mail-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .close-icon {
+    cursor: pointer;
+    padding: 0.3rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+/* Контент модалки */
+.mail-detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  p {
+    margin: 0;
+    line-height: 1.4;
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    label {
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+    textarea {
+      box-sizing: border-box; /* учитываем padding и border в ширине */
+      width: 100%; /* занимаем всю доступную ширину */
+      max-width: 100%;
+      padding: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      resize: vertical;
+      transition: border-color 0.2s;
+      &:focus {
+        outline: none;
+        border-color: #a0c4ff;
+      }
+    }
+  }
+}
+
+/* Действия (кнопки) */
+.mail-detail-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  .btn {
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: transform 0.1s;
+    &:hover {
+      transform: translateY(-2px);
+    }
+    &.approve {
+      background: #50c878;
+    }
+    &.reject {
+      background: #dc5040;
+    }
+  }
+}
+
+/* Адаптив */
+@media (max-width: 480px) {
+  .screen-mail {
+    position: relative; /* убедиться, что есть относительный родитель */
+
+    /* Сдвигаем кнопку «Назад» под карточку ответа */
+    .btn-back-mobile {
+      position: absolute;
+      top: calc(
+        50% + 220px
+      ); /* центр + примерный радиус половины высоты окна (отрегулируйте по факту) */
+      left: 1rem;
+      transform: translateY(0);
+      z-index: 3001;
+    }
+
+    /* Ограничиваем ширину textarea, чтобы не вылезала */
+    .mail-detail-body textarea {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Кнопки отклонить/одобрить в одну колонку под textarea */
+    .mail-detail-actions {
+      flex-direction: column;
+      gap: 0.75rem;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    .mail-detail-actions {
+      flex-direction: row; /* вернуть в одну строку */
+      flex-wrap: wrap; /* если уж совсем мало места, переносить */
+      gap: 0.5rem; /* чуть меньше отступы */
+
+      .btn {
+        width: auto; /* не растягиваем на 100% */
+        flex: 1 1 auto; /* занимают только необходимое место */
+        padding: 0.5rem 1rem; /* чуть меньше по горизонтали */
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .mail-detail-overlay {
+    width: 95%;
+  }
+
+  .mail-detail-actions {
+    /* позволим при узких экранах прокручивать кнопки */
+    display: flex;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem; /* место для скролла */
+  }
+
+  .mail-detail-actions .btn {
+    flex: 0 0 auto; /* не растягиваемся, а остаёмся по контенту */
+    width: auto; /* автоширина */
+    min-width: 100px; /* минимум для клика */
+    padding: 0.6rem 1rem; /* отступы внутри */
+    white-space: nowrap; /* одна строка */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .mail-detail-overlay {
+    width: 90%;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .mail-detail-actions {
+    .btn {
+      padding: 0.6rem 1.2rem;
+    }
+  }
+}

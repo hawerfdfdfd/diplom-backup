@@ -1,0 +1,312 @@
+// Миксины для скругления и анимаций
+@mixin roundedCorners {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+@mixin rotateBase {
+  -webkit-transform: rotate3d(-1, 1, 0, 0deg);
+  -ms-transform: rotate3d(-1, 1, 0, 0deg);
+  -o-transform: rotate3d(-1, 1, 0, 0deg);
+  transform: rotate3d(-1, 1, 0, 0deg);
+}
+
+@mixin rotateRight {
+  -webkit-transform: rotate3d(-1, 1, 0, 30deg);
+  -ms-transform: rotate3d(-1, 1, 0, 30deg);
+  -o-transform: rotate3d(-1, 1, 0, 30deg);
+  transform: rotate3d(-1, 1, 0, 30deg);
+}
+
+@mixin rotateLeft {
+  -webkit-transform: rotate3d(-1, 1, 0, -30deg);
+  -ms-transform: rotate3d(-1, 1, 0, -30deg);
+  -o-transform: rotate3d(-1, 1, 0, -30deg);
+  transform: rotate3d(-1, 1, 0, -30deg);
+}
+
+// Функция для генерации звёзд
+@function generateStars($n) {
+  $value: "#{0} #{random(2000)}px #{random(2000)}px #FFF";
+  @for $i from 2 through $n {
+    $value: "#{$value}, #{random(2000)}px #{random(2000)}px #FFF";
+  }
+  @return unquote($value);
+}
+
+$stars-small: generateStars(700);
+$stars-medium: generateStars(200);
+$stars-big: generateStars(100);
+
+//Ошибка
+.error-container {
+  /* Стили, которые всегда применяются */
+  border-radius: 10px;
+  text-align: center;
+  padding: 0 10px; /* горизонтальные отступы всегда */
+
+  /* Анимация появления/исчезновения */
+  will-change: max-height, opacity, padding;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.8, 0.5, 1),
+    opacity 0.5s cubic-bezier(0.25, 0.8, 0.5, 1),
+    padding 0.5s cubic-bezier(0.25, 0.8, 0.5, 1);
+}
+
+.error-container.visible {
+  max-height: 100px; /* Значение подберите так, чтобы вместить сообщение */
+  opacity: 1;
+  padding: 0.5rem 10px; /* вертикальные отступы добавляются, горизонтальные остаются */
+  background-color: rgb(68, 67, 67);
+}
+
+.error-message {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  color: var(--whiteColor);
+}
+
+.error-container.visible .error-message {
+  opacity: 1;
+}
+
+// Главная страница
+.loginPage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #191f24 100%);
+  // overflow: hidden;
+}
+
+Контейнер для звёзд – занимает весь экран
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // Убираем отрицательный z-index, чтобы звёзды оказались поверх фона
+  z-index: 0;
+}
+
+// Стили для звёзд
+#stars,
+#stars2,
+#stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  @include roundedCorners;
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  box-shadow: $stars-small;
+  animation: animateStars 28.5s ease-in-out infinite;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $stars-small;
+    @include roundedCorners;
+  }
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  box-shadow: $stars-medium;
+  animation: animateStars 30s ease-in-out infinite;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $stars-medium;
+    @include roundedCorners;
+  }
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  box-shadow: $stars-big;
+  animation: animateStars 31.5s ease-in-out infinite;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $stars-big;
+    @include roundedCorners;
+  }
+}
+
+// Анимация вращения звёзд
+@keyframes animateStars {
+  0% {
+    @include rotateBase;
+  }
+  25% {
+    @include rotateRight;
+  }
+  50% {
+    @include rotateBase;
+  }
+  75% {
+    @include rotateLeft;
+  }
+  100% {
+    @include rotateBase;
+  }
+}
+
+// Контейнер для формы логина
+.loginContainer {
+  color: $color-main;
+  position: relative; // Для создания нового контекста позиционирования
+  z-index: 1; // Выводим поверх звёзд
+  height: 70vh;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1); /* Прозрачный фон */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* Начальное состояние для анимации */
+  opacity: 0;
+  transform: translateY(20px);
+
+  /* Применяем анимацию появления */
+  animation: fadeIn 2s ease-out forwards;
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .loginForm {
+    display: flex;
+    align-items: center;
+    flex-basis: 50%;
+    margin: auto;
+    flex-direction: column;
+    gap: 1.5rem;
+    transform: translateY(-1rem);
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    .formHeader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 200px;
+      .icon {
+        font-size: 2.5rem;
+        cursor: pointer;
+      }
+
+      .formHeaderText {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        span {
+          font-size: 25px;
+          padding-right: 5px;
+        }
+
+        p {
+          font-size: 25px;
+        }
+
+        @media screen and (max-width: 401px) {
+          flex-direction: column; // меняем на column при малой ширине
+        }
+      }
+    }
+
+    .mainForm {
+      gap: 1rem;
+      display: grid;
+      align-items: center;
+
+      .inputDiv {
+        label {
+          font-weight: 400;
+          font-size: 14px;
+          padding: 0.5rem 0;
+          display: block;
+        }
+
+        .input {
+          gap: 0.5rem;
+          padding: 1rem;
+          border-radius: 10px;
+          padding-left: 0rem;
+          padding-top: 0.3rem;
+        }
+
+        input {
+          font-family: $font-main;
+          background: none;
+          outline: none;
+          border: none;
+          width: 100%;
+          max-width: 250px;
+          padding: 0.5rem;
+          border-radius: 10px;
+          background-color: $color-main;
+        }
+        input:-webkit-autofill {
+          box-shadow: inset 0 0 0 1000px $color-main;
+        }
+      }
+    }
+  }
+}
+
+//Медиа запросы
+@media screen and (max-width: 602px), (max-width: 678px), (max-width: 927px) {
+  .loginContainer {
+    height: 70%;
+    width: 70%;
+  }
+}

@@ -1,0 +1,26 @@
+//Шрифт
+$font-main: "Montserrat", serif;
+
+//Цвета
+$color-main:#fff;
+
+//Кнопка
+.btn {
+  font-family: $font-main;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  transition: 0.3s ease;
+}
+
+.btn {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
+.btn:hover {
+  color: var(--primaryColor);
+  background: var(--paleGreen);
+}

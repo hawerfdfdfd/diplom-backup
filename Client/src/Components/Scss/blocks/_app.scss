@@ -1,0 +1,157 @@
+/* Фиксированный фон, который остается неизменным */
+@import "../blocks/login";
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #191f24 100%);
+  z-index: -1;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+#stars,
+#stars2,
+#stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  @include roundedCorners;
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  box-shadow: $stars-small;
+  animation: animateStars 28.5s ease-in-out infinite;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $stars-small;
+    @include roundedCorners;
+  }
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  box-shadow: $stars-medium;
+  animation: animateStars 30s ease-in-out infinite;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $stars-medium;
+    @include roundedCorners;
+  }
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  box-shadow: $stars-big;
+  animation: animateStars 31.5s ease-in-out infinite;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $stars-big;
+    @include roundedCorners;
+  }
+}
+
+@keyframes animateStars {
+  0% {
+    @include rotateBase;
+  }
+  25% {
+    @include rotateRight;
+  }
+  50% {
+    @include rotateBase;
+  }
+  75% {
+    @include rotateLeft;
+  }
+  100% {
+    @include rotateBase;
+  }
+}
+
+/* Фон всегда под всеми компонентами */
+.background {
+  z-index: -2; /* ещё ниже */
+}
+
+.stars {
+  z-index: -1; /* между фоном и контентом */
+}
+
+/* Все страницы и модалки лежат поверх звёзд */
+.app-container,
+.page,
+.dashboard-container,
+.workerPage,
+.employee-detail {
+  position: relative;
+  z-index: 0;
+}
+
+/* Кнопка выхода в WorkerPage должна быть выше */
+.workerDownButton .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Контейнер приложения */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Чтобы страницы занимали всю область */
+.page {
+  width: 100%;
+  height: 100%;
+}
+
+/* Дополнительные стили для страниц (по желанию) */
+.login-page,
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: transparent;
+}
