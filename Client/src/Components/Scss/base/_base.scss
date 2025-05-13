@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
+html, body {
+  height: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto; /* или просто overflow: auto; */
+  font-family: "Montserrat", serif;
+}
+
+// -скролл
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
