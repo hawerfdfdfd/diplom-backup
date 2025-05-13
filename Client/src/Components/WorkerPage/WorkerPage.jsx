@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { FaPaperPlane, FaArrowUp } from "react-icons/fa";
 import Axios from "axios";
 import userImg from "../../WorkerAssets/user.png";
-import "../../../../css/main.css";
+import "../../../../css/main.css"; //imp
 
 export default function WorkerPage() {
   const location = useLocation();

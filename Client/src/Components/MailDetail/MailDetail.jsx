@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import Axios from "axios";
-import "../../../../css/main.css";
+import "../../../../css/main.css"; //imp
 
 export default function MailDetail({ mail, onClose, onDecision }) {
   const [comment, setComment] = useState("");
