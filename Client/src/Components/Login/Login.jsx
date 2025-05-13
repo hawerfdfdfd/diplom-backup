@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsMortarboard } from "react-icons/bs";
-import "../../../../css/main.css";//imp2
+import "../../../../css/main.css";//imp3
 
 export default function Login() {
   const [loginUserName, setLoginUserName] = useState("");

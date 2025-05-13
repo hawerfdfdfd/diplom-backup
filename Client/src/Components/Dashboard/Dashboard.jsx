@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import EmployeeDetail from "./EmployeeDetail";
 import MailDetail from "../MailDetail/MailDetail";
-import "../../../../css/main.css"; //imp2
+import "../../../../css/main.css"; //imp3
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
