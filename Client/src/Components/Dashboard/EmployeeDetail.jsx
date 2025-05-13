@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaTimes } from "react-icons/fa";
 import Axios from "axios";
-import "../../../../css/main.css"; //imp3
+import "../../../../css/main.css"; //imp4
 
 export default function EmployeeDetail({
   employee,
