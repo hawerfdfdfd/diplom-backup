@@ -4,10 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-<<<<<<< HEAD
     "start": "node index.js",
-=======
->>>>>>> d7e74cef89a42907f0ac1681101a041b536ba7b2
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
