@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Login from "./Components/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import WorkerPage from "./Components/WorkerPage/WorkerPage";
-import "../../css.main.css"; //imp
+import "../../css.main.css"; //imp2
 
 function PageTransition({ children }) {
   return (
