@@ -461,6 +461,6 @@ app.delete("/mails/:id", (req, res) => {
   });
 });
 
-app.listen(3002, () => {
+app.listen(process.env.PORT || 3002, '127.0.0.1',() => {
   console.log("Server is working on 3002 port");
 });
