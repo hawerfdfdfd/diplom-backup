@@ -14,7 +14,6 @@ const db = mysql.createConnection({
   database: "store",
 });
 
-
 // Обновленный GET /employees с JOIN
 app.get("/employees", (req, res) => {
   const SQL = `
@@ -461,6 +460,6 @@ app.delete("/mails/:id", (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 3002, '127.0.0.1',() => {
+app.listen(process.env.PORT || 3002, "127.0.0.1", () => {
   console.log("Server is working on 3002 port");
 });
