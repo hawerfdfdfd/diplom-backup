@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import Axios from "axios";
-import "../../../../css/main.css"; //imp4
+import "../../../css/main.css"; //imp4
 
 export default function MailDetail({ mail, onClose, onDecision }) {
   const [comment, setComment] = useState("");
@@ -10,7 +10,7 @@ export default function MailDetail({ mail, onClose, onDecision }) {
 
   const handleSubmit = async (mode) => {
     try {
-      const url = `http://localhost:3002/mails/${mail.id}/${mode}`;
+      const url = `/api/mails/${mail.id}/${mode}`;
       await Axios.put(url, { adminComment: comment });
       onDecision(mail.id, mode);
       // запускаем анимацию скрытия

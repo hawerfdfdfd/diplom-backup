@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import EmployeeDetail from "./EmployeeDetail";
 import MailDetail from "../MailDetail/MailDetail";
-import "../../../../css/main.css"; //imp4
+import "../../../css/main.css"; //imp4
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
@@ -25,19 +25,19 @@ export default function Dashboard() {
 
   // load data
   useEffect(() => {
-    Axios.get("http://localhost:3002/employees")
+    Axios.get("/api/employees")
       .then(({ data }) => setEmployees(data))
       .catch(console.error);
 
-    Axios.get("http://localhost:3002/mails")
+    Axios.get("/api/mails")
       .then(({ data }) => setMails(data))
       .catch(console.error);
 
-    Axios.get("http://localhost:3002/departments")
+    Axios.get("/api/departments")
       .then(({ data }) => setDepartments(data))
       .catch(console.error);
 
-    Axios.get("http://localhost:3002/workschedules")
+    Axios.get("/api/workschedules")
       .then(({ data }) => setWorkSchedules(data))
       .catch(console.error);
   }, []);

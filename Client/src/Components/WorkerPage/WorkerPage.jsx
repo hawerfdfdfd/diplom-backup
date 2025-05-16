@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import { FaPaperPlane, FaArrowUp } from "react-icons/fa";
 import Axios from "axios";
 import userImg from "../../WorkerAssets/user.png";
-import "../../../../css/main.css"; //imp4
+import "../../../css/main.css"; //imp4
 
 export default function WorkerPage() {
   const location = useLocation();
@@ -24,7 +24,7 @@ export default function WorkerPage() {
   const fetchMyMails = useCallback(() => {
     if (!userInfo) return;
     const empId = userInfo[0].employee_id;
-    Axios.get(`http://localhost:3002/mails/employee/${empId}`)
+    Axios.get(`/api/mails/employee/${empId}`)
       .then(({ data }) => setMyMails(data))
       .catch(console.error);
   }, [userInfo]);
@@ -47,7 +47,7 @@ export default function WorkerPage() {
     setIsSubmitting(true);
     setSubmitResult(null);
     try {
-      await Axios.post("http://localhost:3002/mails", {
+      await Axios.post("/api/mails", {
         employee_id: u.employee_id,
         subject,
         start_date: startDate,
@@ -86,7 +86,7 @@ export default function WorkerPage() {
     });
 
     try {
-      await Axios.delete(`http://localhost:3002/mails/${id}`);
+      await Axios.delete(`/api/mails/${id}`);
       // после завершения анимации и удаления из базы
       setTimeout(() => {
         setMyMails((prev) => prev.filter((m) => m.id !== id));

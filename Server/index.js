@@ -1,18 +1,24 @@
+require('dotenv').config();
 const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
 
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "",
-  database: "store",
+  host: process.env.DB_HOST,       // должно быть "db" из docker-compose
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER,       // "diplom_user"
+  password: process.env.DB_PASSWORD, // "diplom_pass"
+  database: process.env.DB_NAME    // "diplom"
 });
+
+
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // Обновленный GET /employees с JOIN
 app.get("/employees", (req, res) => {
@@ -39,10 +45,10 @@ app.get("/employees", (req, res) => {
   `;
 
   db.query(SQL, (err, results) => {
-    if (err) {
-      console.error("Ошибка получения сотрудников:", err);
-      return res.status(500).json({ error: "Database error" });
-    }
+       if (err) {
+         console.error('Employees query error:', err);
+         return res.status(500).json({ error: err });    // вернём весь объект ошибки
+       }
     res.json(results);
   });
 });
@@ -75,10 +81,11 @@ app.get("/employees", (req, res) => {
 app.get("/departments", (req, res) => {
   const sqlQuery = "SELECT * FROM departments";
   db.query(sqlQuery, (err, result) => {
-    if (err) {
-      console.error("Ошибка выполнения запроса:", err);
-      res.status(500).json({ error: "Ошибка выполнения запроса" });
-    } else {
+            if (err) {
+            console.error('Departments query error:', err);
+            return res.status(500).json({ error: err });    // вернём весь объект ошибки
+           }
+             else {
       res.json(result);
     }
   });
@@ -327,7 +334,10 @@ app.get("/mails", (req, res) => {
     ORDER BY m.created_at DESC
   `;
   db.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ error: err });
+         if (err) {
+         console.error('Mails query error:', err);
+         return res.status(500).json({ error: err });    // вернём весь объект ошибки
+        }
     // Собираем поле employeeName
     const mails = results.map((row) => ({
       id: row.id,
@@ -460,6 +470,6 @@ app.delete("/mails/:id", (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 3002, "127.0.0.1", () => {
-  console.log("Server is working on 3002 port");
+app.listen(PORT, () => {
+  console.log(`Server is working on ${PORT}`);
 });

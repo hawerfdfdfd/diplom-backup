@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsMortarboard } from "react-icons/bs";
-import "../../../../css/main.css";//imp4
+import "../../../css/main.css";//imp4
 
 export default function Login() {
   const [loginUserName, setLoginUserName] = useState("");
@@ -14,7 +14,7 @@ export default function Login() {
 
   const loginUser = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:3002/login", {
+    Axios.post("/api/login", {
       LoginUserName: loginUserName,
       LoginPassword: loginPassword,
     })

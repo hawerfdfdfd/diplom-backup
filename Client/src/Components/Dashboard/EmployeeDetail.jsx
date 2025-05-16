@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaTimes } from "react-icons/fa";
 import Axios from "axios";
-import "../../../../css/main.css"; //imp4
+import "../../../css/main.css"; //imp4
 
 export default function EmployeeDetail({
   employee,
@@ -72,7 +72,7 @@ export default function EmployeeDetail({
         salary: formData.salary,
       };
       await Axios.put(
-        `http://localhost:3002/employees/${employee.employee_id}`,
+        `/api/employees/${employee.employee_id}`,
         empPayload
       );
 
@@ -80,7 +80,7 @@ export default function EmployeeDetail({
       const newWorkingHours = formData.working_hours;
       const newShiftType = formData.shift_type;
       if (scheduleId) {
-        await Axios.put(`http://localhost:3002/workschedules/${scheduleId}`, {
+        await Axios.put(`/api/workschedules/${scheduleId}`, {
           working_hours: newWorkingHours,
           shift_type: newShiftType,
         });
@@ -88,7 +88,7 @@ export default function EmployeeDetail({
 
       // 3) отдел
       await Axios.put(
-        `http://localhost:3002/departments/${employee.department_id}`,
+        `/api/departments/${employee.department_id}`,
         { department_name: editedDeptName }
       );
 
