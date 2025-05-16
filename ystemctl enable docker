@@ -1,0 +1,28 @@
+[0;1;32m●[0m docker.service - Docker Application Container Engine
+     Loaded: loaded (]8;;file://roisin/usr/lib/systemd/system/docker.service/usr/lib/systemd/system/docker.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Thu 2025-05-15 13:35:33 UTC; 23h ago
+TriggeredBy: [0;1;32m●[0m docker.socket
+       Docs: ]8;;https://docs.docker.comhttps://docs.docker.com]8;;
+   Main PID: 2016 (dockerd)
+      Tasks: 47
+     Memory: 159.0M (peak: 643.5M)
+        CPU: 1min 28.401s
+     CGroup: /system.slice/docker.service
+             ├─[0;38;5;245m 2016 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock[0m
+             ├─[0;38;5;245m27534 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 3306 -container-ip 172.18.0.2 -container-port 3306 -use-listen-fd[0m
+             ├─[0;38;5;245m27538 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 3306 -container-ip 172.18.0.2 -container-port 3306 -use-listen-fd[0m
+             ├─[0;38;5;245m27749 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 3000 -container-ip 172.18.0.4 -container-port 80 -use-listen-fd[0m
+             ├─[0;38;5;245m27754 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 3000 -container-ip 172.18.0.4 -container-port 80 -use-listen-fd[0m
+             ├─[0;38;5;245m28123 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 5000 -container-ip 172.18.0.3 -container-port 5000 -use-listen-fd[0m
+             └─[0;38;5;245m28128 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5000 -container-ip 172.18.0.3 -container-port 5000 -use-listen-fd[0m
+
+May 16 13:20:10 roisin dockerd[2016]: time="2025-05-16T13:20:10.528192916Z" level=info msg="ignoring event" container=86ade70a6b9b6465186d8ae7d7847338928c5c7c5cbb71b99b906f5f35b071ef module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+May 16 13:20:10 roisin dockerd[2016]: time="2025-05-16T13:20:10.548287471Z" level=warning msg="ShouldRestart failed, container will not be restarted" container=86ade70a6b9b6465186d8ae7d7847338928c5c7c5cbb71b99b906f5f35b071ef daemonShuttingDown=false error="restart canceled" execDuration=2h11m58.676422223s exitStatus="{0 2025-05-16 13:20:10.508371131 +0000 UTC}" hasBeenManuallyStopped=true restartCount=0
+May 16 13:20:20 roisin dockerd[2016]: time="2025-05-16T13:20:20.726223502Z" level=info msg="Container failed to exit within 10s of signal 15 - using the force" container=d99ef143ff7f913be3d6f1a627b3c141ae456e53c978e93ccf4c251ebbc6488d spanID=09b5c8f2341838b9 traceID=5ad9b2c51120f5118c2d473ca771dea1
+May 16 13:20:20 roisin dockerd[2016]: time="2025-05-16T13:20:20.772042410Z" level=info msg="ignoring event" container=d99ef143ff7f913be3d6f1a627b3c141ae456e53c978e93ccf4c251ebbc6488d module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+May 16 13:20:20 roisin dockerd[2016]: time="2025-05-16T13:20:20.791644587Z" level=warning msg="ShouldRestart failed, container will not be restarted" container=d99ef143ff7f913be3d6f1a627b3c141ae456e53c978e93ccf4c251ebbc6488d daemonShuttingDown=false error="restart canceled" execDuration=4m11.082427011s exitStatus="{137 2025-05-16 13:20:20.75676779 +0000 UTC}" hasBeenManuallyStopped=true restartCount=8
+May 16 13:20:21 roisin dockerd[2016]: time="2025-05-16T13:20:21.385625971Z" level=info msg="ignoring event" container=38b6a5bb6415b446511a5ed21980a5ffb76381d0a732c4f4df10cba1b495a276 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+May 16 13:20:21 roisin dockerd[2016]: time="2025-05-16T13:20:21.404369708Z" level=warning msg="ShouldRestart failed, container will not be restarted" container=38b6a5bb6415b446511a5ed21980a5ffb76381d0a732c4f4df10cba1b495a276 daemonShuttingDown=false error="restart canceled" execDuration=35m20.223170034s exitStatus="{0 2025-05-16 13:20:21.370351692 +0000 UTC}" hasBeenManuallyStopped=true restartCount=1
+May 16 13:20:21 roisin dockerd[2016]: time="2025-05-16T13:20:21.642210290Z" level=warning msg="Error (Unable to complete atomic operation, key modified) deleting object [endpoint_count d5431ae12446118c7a1eda1ef33473e6447df5ddb097897408b7a7e83a4a290e], retrying...."
+May 16 13:21:07 roisin dockerd[2016]: time="2025-05-16T13:21:07.106607790Z" level=info msg="ignoring event" container=ddf1598b93c56aaba77897d80298350ce5b0dd581a77953eb45b9f6aed5fd702 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
+May 16 13:21:17 roisin dockerd[2016]: time="2025-05-16T13:21:17.640654162Z" level=info msg="ignoring event" container=ddf1598b93c56aaba77897d80298350ce5b0dd581a77953eb45b9f6aed5fd702 module=libcontainerd namespace=moby topic=/tasks/delete type="*events.TaskDelete"
